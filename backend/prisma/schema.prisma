@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid()) // Unique ID for the user
+  username   String   @unique  // Unique username
+  password   String    // Hashed password
+  name       String?    // User's full name
+  bday       DateTime?  // User's date of birth
+  contact    String    // User's contact number (for SMS/WhatsApp)
+  email      String    // User's email (for email notifications)
+  scooters   Scooter[] // List of scooters registered by the user
+  accidents  Accident[] // List of accidents reported by the user
+  createdAt  DateTime  @default(now()) // Account creation timestamp
+}
+
+// Scooter model
+model Scooter {
+  id           String   @id @default(uuid()) // Unique ID for the scooter
+  model        String?   // Scooter model
+  vehicleNumber String  // Number plate of the vehicle
+  userId       String   // Foreign key to User
+  user         User     @relation(fields: [userId], references: [id]) // Relation to User model
+  createdAt    DateTime @default(now()) // Registration timestamp
+}
+
+// Accident model
+model Accident {
+  id         String   @id @default(uuid()) // Unique ID for the accident
+  userId     String   // Foreign key to User
+  location   Json     // Location details in JSON format (latitude, longitude)
+  timestamp  DateTime @default(now()) // Accident timestamp
+  user       User     @relation(fields: [userId], references: [id]) // Relation to User model
+  notification Notification[] // List of notifications sent for this accident
+}
+
+// Notification model
+model Notification {
+  id           String   @id @default(uuid()) // Unique ID for the notification
+  accidentId   String   // Foreign key to Accident
+  type         String   // Type of notification (e.g., "SMS", "WhatsApp", "Email")
+  recipient    String   // Recipient's contact (phone/WhatsApp) or email
+  message      String   // Notification message
+  sentAt       DateTime @default(now()) // Timestamp when the notification was sent
+  accident     Accident @relation(fields: [accidentId], references: [id]) // Relation to Accident model
+}
