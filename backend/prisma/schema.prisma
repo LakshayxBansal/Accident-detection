@@ -20,7 +20,7 @@ model User {
   name       String?    // User's full name
   bday       DateTime?  // User's date of birth
   contact    String    // User's contact number (for SMS/WhatsApp)
-  email      String    // User's email (for email notifications)
+  email      String   @unique // User's email (for email notifications)
   scooters   Scooter[] // List of scooters registered by the user
   accidents  Accident[] // List of accidents reported by the user
   createdAt  DateTime  @default(now()) // Account creation timestamp
@@ -30,7 +30,7 @@ model User {
 model Scooter {
   id           String   @id @default(uuid()) // Unique ID for the scooter
   model        String?   // Scooter model
-  vehicleNumber String  // Number plate of the vehicle
+  vehicleNumber String  @unique// Number plate of the vehicle
   userId       String   // Foreign key to User
   user         User     @relation(fields: [userId], references: [id]) // Relation to User model
   createdAt    DateTime @default(now()) // Registration timestamp

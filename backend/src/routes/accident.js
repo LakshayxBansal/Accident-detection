@@ -1,6 +1,6 @@
 // Accident Management
-// POST /api/accident/report – Report an accident.
-// GET /api/accident/history – Get accident history.
+// POST /v1/accident/report – Send an alert of the accident with the location(longitude and latitude)
+// GET /v1/accident/history – Get accident history. 
 
 import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
