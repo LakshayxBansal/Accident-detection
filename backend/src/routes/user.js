@@ -1,15 +1,9 @@
-//Authentication
-// POST /api/user/signup – Register new users.
-// POST /api/user/login – User login and JWT generation.
-// GET /api/user/profile – Fetch user profile.
-// PUT /api/user/profile – Update user profile.
-
-
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { Router } from 'express';
+import {authenticateJWT} from '../middleware/middleware.js'
 
 const router = Router();
 const prisma = new PrismaClient().$extends(withAccelerate());
@@ -19,7 +13,7 @@ const secretKey = process.env.JWT_SECRET;
 // Signing up
 router.post('/signup', async (req, res) => {
     try {
-        const { name, email, username, password, contact, bday } = req.body;
+        const { name, email, username, password, contact } = req.body;
 
         if (!name || !email || !username || !password || !contact) {
             return res.status(400).json({ error: 'All fields are required' });
@@ -31,7 +25,6 @@ router.post('/signup', async (req, res) => {
             return res.status(400).json({ error: 'User already exists' });
         }
 
-        const birthday = new Date(bday);
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -42,7 +35,6 @@ router.post('/signup', async (req, res) => {
                 username,
                 password: hashedPassword,
                 contact,
-                bday: birthday,
             }
         });
 
@@ -82,7 +74,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: user.id }, secretKey, {expire: '1h'});
+        const token = jwt.sign({ id: user.id }, secretKey, {expiresIn: '1h'});
 
         res.status(200).json({ message: 'Login successful', user, token });
     } catch (e) {
@@ -90,27 +82,6 @@ router.post('/login', async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 });
-
-
-
-// Middleware to authenticate the user using JWT
-const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.status(401).json({
-        error: "Token unavailable"
-    });
-
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) return res.status(403).json({
-            error : "Error during jwt verification"
-        });
-        req.user = user;
-        next();
-    });
-};
-
 
 // Get the details of the user
 router.get('/profile', authenticateJWT, async (req, res) => {
@@ -133,7 +104,7 @@ router.get('/profile', authenticateJWT, async (req, res) => {
 // Update the profile of the user
 router.put('/update', authenticateJWT, async (req, res) => {
     try {
-        const { username, password, email, contact, bday } = req.body;
+        const { username, password, email, contact } = req.body;
         const userId = req.user.id;
 
         
@@ -149,7 +120,6 @@ router.put('/update', authenticateJWT, async (req, res) => {
                 password: hashedPassword || undefined,
                 email: email || undefined,
                 contact: contact || undefined,
-                bday: bday ? new Date(bday) : undefined,
             },
         });
 

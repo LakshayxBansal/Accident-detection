@@ -5,31 +5,11 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { Router } from 'express';
+import { authenticateJWT } from '../middleware/middleware.js';
 
 const router = Router();
 const prisma = new PrismaClient().$extends(withAccelerate());
 const secretKey = process.env.JWT_SECRET
-
-
-// Middleware ( for authentication of user) 
-const authenticateJWT = (req,res,next)=>{
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if(token == null) return res.status(401).json({
-        error: "Token is unavailable"
-    })
-
-    jwt.verify(token,secretKey,(err,user)=>{
-        if(err){
-            return res.status(403).json({
-                error: "Error during authentication "
-            })
-        }
-        req.user = user;
-        next();
-    })
-}
 
 
 // Add a scooter for the user
@@ -101,11 +81,12 @@ router.get('/details',authenticateJWT,async(req,res)=>{
             scooters
         })
     }catch(e){
-        console.error("Error fetcching scooter",e);
+        console.error("Error fetching scooter",e);
         return res.status(500).json({
             error: "Internal server error"
         });
     }
 })
+
 
 export default router;
