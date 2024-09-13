@@ -1,10 +1,13 @@
-import {zod as z} from 'zod';
+import {z} from 'zod';
 
 export const signupInput = z.object({
     name : z.string().min(3,{
         message : 'Name should have atleast 3 characters'
     }).max(255),
     email : z.string().email(),
+    username : z.string().min(3,{
+        message : 'Username should have atleast 3 characters'
+    }).max(255),
     password : z.string().min(6,{
         message: "Password must have atleast 6 characters "
     }).max(255),
@@ -12,9 +15,7 @@ export const signupInput = z.object({
         message: "Must be 10 digits"
     }).max(10,{
         message: "Must be 10 digits"
-    }),
-    pic: z.string().url().optional(),
-
+    })
 }); 
 
 

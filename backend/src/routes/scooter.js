@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { Router } from 'express';
 import { authenticateJWT } from '../middleware/middleware.js';
+import redisClient from '../services/redis/redis.js';
 
 const router = Router();
 const prisma = new PrismaClient().$extends(withAccelerate());
@@ -60,33 +61,71 @@ router.post('/register', authenticateJWT, async (req, res) => {
 });
 
 
-// Details of register scooter for the user
-router.get('/details',authenticateJWT,async(req,res)=>{
-    try{
-        const userId = req.user.id ; 
+// // Details of register scooter for the user
+// router.get('/details',authenticateJWT,async(req,res)=>{
+//     try{
+//         const userId = req.user.id ; 
+//         const scooters = await prisma.scooter.findMany({
+//             where : {
+//                 userId
+//             }
+//         });
+
+//         if(scooters.length === 0){
+//             return res.status(404).json({
+//                 error: "No scooters found"
+//             })
+//         }
+
+//         res.status(200).json({
+//             message: "Scooters fetched successfully",
+//             scooters
+//         })
+//     }catch(e){
+//         console.error("Error fetching scooter",e);
+//         return res.status(500).json({
+//             error: "Internal server error"
+//         });
+//     }
+// })
+
+router.get('/details', authenticateJWT, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Check if scooters are cached
+        const cachedScooters = await redisClient.get(`scooters:${userId}`);
+
+        if (cachedScooters) {
+            return res.status(200).json({
+                message: "Scooters fetched successfully (from cache)",
+                scooters: JSON.parse(cachedScooters)
+            });
+        }
+
+        // Fetch scooters from the database
         const scooters = await prisma.scooter.findMany({
-            where : {
-                userId
-            }
+            where: { userId }
         });
 
-        if(scooters.length === 0){
+        if (scooters.length === 0) {
             return res.status(404).json({
                 error: "No scooters found"
-            })
+            });
         }
+
+        // Cache the scooters for future access (TTL of 1 hour)
+        await redisClient.set(`scooters:${userId}`, JSON.stringify(scooters), { EX: 3600 });
 
         res.status(200).json({
             message: "Scooters fetched successfully",
             scooters
-        })
-    }catch(e){
-        console.error("Error fetching scooter",e);
-        return res.status(500).json({
-            error: "Internal server error"
         });
+    } catch (e) {
+        console.error("Error fetching scooters", e);
+        return res.status(500).json({ error: "Internal server error" });
     }
-})
+});
 
 
 export default router;

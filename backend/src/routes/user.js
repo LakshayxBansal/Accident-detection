@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { Router } from 'express';
 import {authenticateJWT} from '../middleware/middleware.js'
+import redisClient from '../services/redis/redis.js';
 
 const router = Router();
 const prisma = new PrismaClient().$extends(withAccelerate());
@@ -83,15 +84,43 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Get the details of the user
+// // Get the details of the user
+// router.get('/profile', authenticateJWT, async (req, res) => {
+//     try {
+//         const userId = req.user.id;
+//         const user = await prisma.user.findUnique({ where: { id: userId } });
+
+//         if (!user) {
+//             return res.status(404).json({ error: 'User not found' });
+//         }
+
+//         res.status(200).json(user);
+//     } catch (e) {
+//         console.error("Profile Fetch Error:", e);
+//         return res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
+
 router.get('/profile', authenticateJWT, async (req, res) => {
     try {
         const userId = req.user.id;
+
+        // Check if the user data is in the cache
+        const cachedUser = await redisClient.get(`user:${userId}`);
+
+        if (cachedUser) {
+            return res.status(200).json(JSON.parse(cachedUser));
+        }
+
+        // If not found in cache, fetch from DB
         const user = await prisma.user.findUnique({ where: { id: userId } });
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
+
+        // Store the fetched user data in Redis (with a TTL of 1 hour)
+        await redisClient.set(`user:${userId}`, JSON.stringify(user),{ EX: 3600 });
 
         res.status(200).json(user);
     } catch (e) {

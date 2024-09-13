@@ -1,9 +1,7 @@
-// This is your Prisma schema file
-// For more information refer to: https://www.prisma.io/docs/getting-started
 
 datasource db {
-  provider = "postgresql" // Assuming PostgreSQL; adjust if you're using another database
-  url      = env("DATABASE_URL") // Database connection string from .env file
+  provider = "postgresql" 
+  url      = env("DATABASE_URL")
 }
 
 generator client {
