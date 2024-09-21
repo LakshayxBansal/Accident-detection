@@ -84,22 +84,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// // Get the details of the user
-// router.get('/profile', authenticateJWT, async (req, res) => {
-//     try {
-//         const userId = req.user.id;
-//         const user = await prisma.user.findUnique({ where: { id: userId } });
-
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
-
-//         res.status(200).json(user);
-//     } catch (e) {
-//         console.error("Profile Fetch Error:", e);
-//         return res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
+// Get the details of the user
 
 router.get('/profile', authenticateJWT, async (req, res) => {
     try {

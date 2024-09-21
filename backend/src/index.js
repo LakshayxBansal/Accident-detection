@@ -3,8 +3,10 @@ import accidentRouter from './routes/accident.js';
 import alertRouter from './routes/alert.js';
 import scooterRouter from './routes/scooter.js';
 import userRouter from './routes/user.js';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 app.use(express.json());
