@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import './App.css'  
 import { ThemeProvider } from './components/themeprovider'
-import { ModeToggle } from './components/mode-toggle'
-// import { BrowserRouter as Router, Routes } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import GoogleOAuthProviderWrapper from '../src/auth/Google0AuthProvider';
-import AuthContainer from './auth/AuthContainer';
-import { AvatarDemo } from './components/Avatar-user';
-import Home from './pages/Home';
-import Sidebar3 from './components/Sidebar3';
 import Sidebar2 from './components/Sidebar2';
+import Sidebar1 from './components/Sidebar';
 
 function App() {
   const [showLogoutBox, setShowLogoutBox] = useState(false);

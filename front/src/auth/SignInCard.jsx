@@ -5,6 +5,7 @@ import { Input } from '../components/ui/input';
 import { Separator } from '../components/ui/separator';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { SiOnlyfans } from "react-icons/si";
 import { GoogleLogin } from '@react-oauth/google';
 
 export const SignInCard = ({ setState }) => {
@@ -67,19 +68,19 @@ export const SignInCard = ({ setState }) => {
               </Button>
             )}
           />
-          <GoogleLogin
-          onSuccess = {handleGithubSuccess}
-          onError = {handleGithubError}
-          render={({ onClick }) => (
-            <Button onClick={onClick} variant="outline" size="lg" className="w-full relative">
+          <Button variant="outline" size="lg" className=" w-full relative">
               <FaGithub className="size-5 absolute top-3 left-3"/>
               Continue with Github
-            </Button>
-          )}
-          />
+          </Button>
+
+          <Button variant="outline" size="lg" className="w-full relative bg-gradient-to-r from-red-500 to-pink-500 text-white hover:bg-red-600 transition duration-200 rounded-lg shadow-lg">
+            <SiOnlyfans className="absolute top-3 left-3 text-blue-300 text-2xl" />
+            Continue with Onlyfans
+          </Button>
+
         </div>
-        <p className="text-xs text-muted-foreground">
-          Don&apos;t have an account? <span onClick={() => setState("signUp")} className="text-sky-700 hover:underline cursor-pointer">Sign Up</span>
+        <p className="text-xs text-muted-foreground text-white">
+          Don&apos;t have an account? <span onClick={() => setState("signUp")} className="text-sky-500 hover:underline cursor-pointer">Sign Up</span>
         </p>
       </CardContent>
     </Card>

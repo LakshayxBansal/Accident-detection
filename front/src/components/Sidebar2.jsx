@@ -32,6 +32,7 @@ import Home from "../pages/Home";
 import { ModeToggle } from "./mode-toggle";
 import { AvatarDemo } from "./Avatar-user";
 import SignUpCard from '../auth/SignUpCard';
+import Installation from './Installation';
 
 // This is sample data.
 const data = {
@@ -42,7 +43,7 @@ const data = {
       items: [
         {
           title: "Installation",
-          url: "#",
+          url: "/installation",
         },
         {
           title: "Project Structure",
@@ -274,10 +275,10 @@ export default function Sidebar2() {
             <ModeToggle className="align-baseline h-10 w-10"/>
           </header>
           <div className="flex flex-1 flex-col">
-            
               <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/login" element={<AuthContainer />} />
+                <Route path="/installation" element={<Installation />} />
                 {/* Add more routes as needed */}
               </Routes>
             
