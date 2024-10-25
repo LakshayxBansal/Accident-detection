@@ -1,0 +1,98 @@
+//older prisma schema that was wokring
+datasource db {
+  provider = "postgresql" 
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String    @id @default(cuid())
+  username    String    @unique
+  password    String
+  email       String    @unique
+  contact     String    @unique
+  name        String?
+  scooters    Scooter[]
+  accidents   Accident[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Scooter {
+  id            String    @id @default(cuid())
+  model         String
+  vehicleNumber String    @unique
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  accidents     Accident[] // Add this line to establish the relation
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Accident {
+  id           String    @id @default(cuid())
+  userId       String
+  scooterId    String
+  location     Json      // Store location data as JSON
+  user         User      @relation(fields: [userId], references: [id])
+  scooter      Scooter   @relation(fields: [scooterId], references: [id])
+  createdAt    DateTime  @default(now())
+}
+
+
+
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String      @id @default(cuid())
+  username    String      @unique
+  password    String
+  email       String      @unique
+  name        String?
+  scooters    Scooter[]   // Relation to scooters
+  accidents   Accident[]  // Relation to accidents
+  contacts    Contact[]   // Relation to contacts
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Scooter {
+  id            String      @id @default(cuid())
+  model         String
+  vehicleNumber String      @unique
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade) // Cascade delete for scooters
+  accidents     Accident[]  // Relation to accidents
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Accident {
+  id           String      @id @default(cuid())
+  userId       String
+  scooterId    String
+  location     Json        // Store location data as JSON
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scooter      Scooter     @relation(fields: [scooterId], references: [id], onDelete: Cascade) // Keep the onDelete here
+  createdAt    DateTime    @default(now())
+}
+
+model Contact {
+  id        String  @id @default(cuid())
+  phone     String  @unique // or remove unique constraint if you want multiple entries with the same number
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
