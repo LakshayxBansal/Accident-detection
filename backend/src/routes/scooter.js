@@ -98,7 +98,7 @@ router.get('/details', authenticateJWT, async (req, res) => {
 
         if (cachedScooters) {
             return res.status(200).json({
-                message: "Scooters fetched successfully (from cache)",
+                message: "Scooters fetched successfully",
                 scooters: JSON.parse(cachedScooters)
             });
         }
