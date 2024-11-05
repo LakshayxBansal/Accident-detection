@@ -1,0 +1,73 @@
+body {
+    background: #f1f1f1;
+  }
+  
+  .container {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: #fafafa;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .container:after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 56px;
+    bottom: 52.05px;
+    background: #1934AB;
+    -webkit-transform: skew(-10deg);
+            transform: skew(-10deg);
+  }
+  
+  .container:hover {
+    box-shadow: 0px 15px 40px 5px rgba(0, 0, 0, 0.2), 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .paypal {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -55px;
+    margin-top: -60px;
+    background: rgba(0, 30, 162, 0.9);
+    border-radius: 5px 0px 5px 5px;
+    -webkit-transform: skew(-10deg) scaleY(1.15);
+            transform: skew(-10deg) scaleY(1.15);
+    -webkit-filter: drop-shadow(30px 20px 0px #009cde);
+            filter: drop-shadow(30px 20px 0px #009cde);
+  }
+  .paypal:before {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: 65px;
+    left: 30px;
+    border-top: 2px solid rgba(0, 30, 162, 0.9);
+    border-left: 2px solid rgba(0, 30, 162, 0.9);
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+  .paypal:after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 65px;
+    left: 29.5px;
+    background: inherit;
+    border-radius: 0px 40px 55px 0px;
+  }
+  
