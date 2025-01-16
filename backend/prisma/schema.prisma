@@ -11,9 +11,9 @@ generator client {
 model User {
   id          String    @id @default(cuid())
   username    String    @unique
-  password    String
+  password    String?
   email       String    @unique
-  contact     String    @unique
+  contact     String?    @unique
   name        String?
   scooters    Scooter[]
   accidents   Accident[]
