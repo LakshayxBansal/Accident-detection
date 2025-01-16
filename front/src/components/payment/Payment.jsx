@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
+import { Checkbox } from "@/components/ui/checkbox"
+
 import { Input } from "@/components/ui/input"
 
 
@@ -51,22 +53,24 @@ const Payment = () => {
                 </CardContent>
             </div>
 
-            <CardContent>
-                <p className='text-left'>Name</p>
-                <Input placeholder="First Last" className="mt-2 rounded-r-xl rounded-l-xl"/>
-            </CardContent>
 
             <CardContent>
-                <p className='text-left'>City</p>
-                <Input placeholder="First Last" className="mt-2 rounded-r-xl rounded-l-xl"/>
+                <p className='text-left'>Cardholder name</p>
+                <Input placeholder="Full name on card" className="mt-2 rounded-r-xl rounded-l-xl"/>
             </CardContent>
 
             <CardContent>
                 <p className='text-left'>Card number</p>
-                <Input placeholder="First Last" className="mt-2 rounded-r-xl rounded-l-xl"/>
+                <Input placeholder="Enter your Card number" className="mt-2 rounded-r-xl rounded-l-xl"/>
             </CardContent>
 
-            <CardContent className="flex justify-center">
+            <CardContent className="">
+                <p className='text-left'>Billing Address</p>
+                <Input placeholder="Enter your billing address" className="mt-2 rounded-r-xl rounded-l-xl"/>
+            </CardContent>
+
+
+            <CardContent className="flex justify-center space-between">
                 <CardContent className="w-auto">
                     <p className='text-left'>Expires</p>
                     <Select>
@@ -75,18 +79,18 @@ const Payment = () => {
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                            <SelectItem value="apple">January</SelectItem>
-                            <SelectItem value="banana">February</SelectItem>
-                            <SelectItem value="blueberry">March</SelectItem>
-                            <SelectItem value="grapes">April</SelectItem>
-                            <SelectItem value="pineapple">May</SelectItem>
-                            <SelectItem value="pineapple">June</SelectItem>
-                            <SelectItem value="pineapple">July</SelectItem>
-                            <SelectItem value="pineapple">August</SelectItem>
-                            <SelectItem value="pineapple">September</SelectItem>
-                            <SelectItem value="pineapple">October</SelectItem>
-                            <SelectItem value="pineapple">November</SelectItem>
-                            <SelectItem value="pineapple">December</SelectItem>
+                            <SelectItem value="01">January</SelectItem>
+                            <SelectItem value="02">February</SelectItem>
+                            <SelectItem value="03">March</SelectItem>
+                            <SelectItem value="04">April</SelectItem>
+                            <SelectItem value="05">May</SelectItem>
+                            <SelectItem value="06">June</SelectItem>
+                            <SelectItem value="07">July</SelectItem>
+                            <SelectItem value="08">August</SelectItem>
+                            <SelectItem value="09">September</SelectItem>
+                            <SelectItem value="10">October</SelectItem>
+                            <SelectItem value="11">November</SelectItem>
+                            <SelectItem value="12">December</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -120,11 +124,24 @@ const Payment = () => {
                     <Input placeholder="CVC" className="mt-2 rounded-r-xl rounded-l-xl"/>
                 </CardContent>
             </CardContent>
+
+
+            <div className="items-top flex space-x-2">
+                <Checkbox id="terms1" />
+                <div className="flex justify-center">
+                    <label htmlFor="terms1"className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        Accept terms and conditions
+                    </label>
+                    <p className="text-sm text-muted-foreground">
+                        You agree to our Terms of Service and Privacy Policy.
+                    </p>
+                </div>
+            </div>
             
             <CardContent>
                 <Button className="size-full rounded-r-xl rounded-l-xl">Continue</Button>
             </CardContent>
-          </Card>
+    </Card>
 
   )
 }

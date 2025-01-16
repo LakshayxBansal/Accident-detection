@@ -55,7 +55,7 @@ const UpgradePlan = () => {
             </CardContent>
             
             <CardFooter className="text-xs mt-5 justify-center text-white-400 p-4 rounded-b-lg border-t-2 border-slate-500">
-              <p className='text-center italic'>Gareeb bhosdika</p>
+              <p className='text-center italic'>Free version it is</p>
             </CardFooter>
           </Card>
         </div>
@@ -100,7 +100,7 @@ const UpgradePlan = () => {
               <p>Because it's capitalism bitch</p>
             </CardFooter> */}
             <CardFooter className="text-xs mt-5 justify-center text-black dark:text-white p-4 rounded-b-lg border-t-2 border-slate-500">
-              <p className="text-center italic">Because it's capitalism, bitch!</p>
+              <p className="text-center italic">Because it's capitalism</p>
             </CardFooter>
 
           </Card>
@@ -146,7 +146,7 @@ const UpgradePlan = () => {
               <p>Because it's capitalism bitch</p>
             </CardFooter> */}
             <CardFooter className="text-xs mt-5 justify-center text-black dark:text-white p-4 rounded-b-lg border-t-2 border-slate-500">
-              <p className="text-center italic">I'll suck your weiner</p>
+              <p className="text-center italic">You're Premium member</p>
             </CardFooter>
 
           </Card>

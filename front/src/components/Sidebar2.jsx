@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GalleryVerticalEnd, Minus, Plus, Search } from "lucide-react";
+import { Minus, Plus, Search } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -31,8 +31,11 @@ import { Link,BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import { ModeToggle } from "./mode-toggle";
 import { AvatarDemo } from "./Avatar-user";
-import SignUpCard from '../auth/SignUpCard';
 import Installation from './Installation';
+import Plan from './payment/UpgradePlan';
+import UpgradePlan from './payment/UpgradePlan';
+import Payment from './payment/Payment';
+import UserProfilePage from '../Profile/UserProfilePage';
 
 // This is sample data.
 const data = {
@@ -56,12 +59,12 @@ const data = {
       url: "#",
       items: [
         {
-          title: "Routing",
-          url: "#",
+          title: "Plan Upgradation",
+          url: "/upgradeplan",
         },
         {
-          title: "Data Fetching",
-          url: "#",
+          title: "Payment",
+          url: "/payment",
           isActive: true,
         },
         {
@@ -73,8 +76,8 @@ const data = {
           url: "/",
         },
         {
-          title: "Signup",
-          url: "/signup",
+          title: "User Profile",
+          url: "/user",
         },
         {
           title: "Optimizing",
@@ -107,12 +110,12 @@ const data = {
       ],
     },
     {
-      title: "API Reference",
+      title: "Upgrade your Plan",
       url: "#",
       items: [
         {
-          title: "Components",
-          url: "#",
+          title: "Plan Upgradation",
+          url: "/payment",
         },
         {
           title: "File Conventions",
@@ -141,8 +144,8 @@ const data = {
       url: "#",
       items: [
         {
-          title: "Accessibility",
-          url: "#",
+          title: "Payment",
+          url: "/payment",
         },
         {
           title: "Fast Refresh",
@@ -279,6 +282,9 @@ export default function Sidebar2() {
                 <Route path="/" element={<Home/>} />
                 <Route path="/login" element={<AuthContainer />} />
                 <Route path="/installation" element={<Installation />} />
+                <Route path="/upgradeplan" element={<UpgradePlan/>} />
+                <Route path="/payment" element={<Payment/>} />
+                <Route path="/user" element={<UserProfilePage/>} />
                 {/* Add more routes as needed */}
               </Routes>
             

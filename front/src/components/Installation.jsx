@@ -34,13 +34,14 @@ import { TracingBeam } from "../components/ui/tracing-beam";
 //     </TracingBeam>)
 //   );
 // }
+
 const Installation = () => {
     return (
       <TracingBeam className="px-6">
         <div className="max-w-2xl mx-auto antialiased pt-4 relative">
           {dummyContent.map((item, index) => (
             <div key={`content-${index}`} className="mb-10">
-              <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
+              <h2 className="bg-black text-white dark:bg-cyan-300 dark:text-black rounded-full text-sm w-fit px-4 py-1 mb-4">
                 {item.badge}
               </h2>
   
@@ -69,80 +70,57 @@ const Installation = () => {
 
 const dummyContent = [
   {
-    title: "Register yourself on your website",
+    title: "Register and Book Your Demo",
     description: (
       <>
         <p>
-          Sit duis est minim proident non nisi velit non consectetur. Esse
-          adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt
-          Lorem ut aliqua anim do. Duis cupidatat qui irure cupidatat incididunt
-          incididunt enim magna id est qui sunt fugiat. Laboris do duis pariatur
-          fugiat Lorem aute sit ullamco. Qui deserunt non reprehenderit dolore
-          nisi velit exercitation Lorem qui do enim culpa. Aliqua eiusmod in
-          occaecat reprehenderit laborum nostrud fugiat voluptate do Lorem culpa
-          officia sint labore. Tempor consectetur excepteur ut fugiat veniam
-          commodo et labore dolore commodo pariatur.
-        </p>
-        <p>
-          Dolor minim irure ut Lorem proident. Ipsum do pariatur est ad ad
-          veniam in commodo id reprehenderit adipisicing. Proident duis
-          exercitation ad quis ex cupidatat cupidatat occaecat adipisicing.
-        </p>
-        <p>
-          Tempor quis dolor veniam quis dolor. Sit reprehenderit eiusmod
-          reprehenderit deserunt amet laborum consequat adipisicing officia qui
-          irure id sint adipisicing. Adipisicing fugiat aliqua nulla nostrud.
-          Amet culpa officia aliquip deserunt veniam deserunt officia
-          adipisicing aliquip proident officia sunt.
+        Begin by creating an account on our website, abc.com. This will allow you to manage your system and receive updates. After registration, schedule a demo session to understand how the accident detection system works. During the demo, our team will walk you through the system’s features, including how it detects accidents, alerts emergency contacts, and shares your location with relevant parties. The demo ensures you’re fully informed and ready for the next steps.
         </p>
       </>
     ),
-    badge: "React",
+    badge: "Step 1",
     image:
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    title: "Book your Demo",
+    title: "Order and Receive Your Hardware",
     description: (
       <>
         <p>
-          Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat
-          deserunt cupidatat aute. Enim cillum dolor et nulla sunt exercitation
-          non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur
-          sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea
-          velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam
-          commodo proident aliqua id ad deserunt dolor aliquip duis veniam sunt.
-        </p>
-        <p>
-          In dolore veniam excepteur eu est et sunt velit. Ipsum sint esse
-          veniam fugiat esse qui sint ad sunt reprehenderit do qui proident
-          reprehenderit. Laborum exercitation aliqua reprehenderit ea sint
-          cillum ut mollit.
+        Once you've understood the system’s functionality, browse our website to select the hardware kit that suits your vehicle. After placing your order, you’ll receive a notification when the hardware is shipped to your address. The kit will include all necessary components: sensors, GPS tracker, installation tools, and an easy-to-follow manual. Once the package arrives, check to ensure all items are intact and ready for installation.
         </p>
       </>
     ),
-    badge: "Changelog",
+    badge: "Step 2",
     image:
-      "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    title: "Lorem Ipsum Dolor Sit Amet",
+    title: "Install the Hardware",
     description: (
       <>
         <p>
-          Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat
-          deserunt cupidatat aute. Enim cillum dolor et nulla sunt exercitation
-          non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur
-          sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea
-          velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam
-          commodo proident aliqua id ad deserunt dolor aliquip duis veniam sunt.
+        Follow the detailed installation instructions provided in the kit to securely install the hardware on your vehicle. The hardware needs to be correctly placed for optimal accident detection, including positioning the sensors and GPS tracker. While you can install the system yourself with the provided instructions, we also offer professional installation services for those who prefer assistance. After installation, power on the system to begin the activation process.
         </p>
       </>
     ),
-    badge: "Launch Week",
+    badge: "Step 3",
     image:
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+  {
+    title: "Link Your System and Start Using It",
+    description: (
+      <>
+        <p>
+        The final step is to link the hardware to your account on abc.com. Each hardware unit comes with a unique ID that you’ll enter into your account to sync it with your vehicle. Once linked, the system is ready to go live. In the event of an accident, the system will detect it, send alerts to your emergency contacts, and provide real-time GPS location data. You can monitor these alerts through your account and mobile app, ensuring you’re always connected for quick assistance.
+        </p>
+      </>
+    ),
+    badge: "Step 4",
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  }
 ];
 
 

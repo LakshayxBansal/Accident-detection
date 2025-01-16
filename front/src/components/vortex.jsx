@@ -1,8 +1,10 @@
-import React from 'react';
-import { TypewriterEffect } from '../../components/ui/typewriter-effect';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Vortex } from "../components/ui/vortex";
+import { useNavigate } from "react-router-dom";
+import { TypewriterEffect } from "./ui/typewriter-effect";
 
-const HomeComp1 = () => {
+export function VortexDemo() {
+
   const words = [
     { text : "Explore", className: "text-blue-500 dark:text-green-300" },
     {text : " " ,className: "mr-2" },
@@ -30,24 +32,31 @@ const HomeComp1 = () => {
     {text : " " ,className: "mr-2" },
   ];
 
+
   const navigate = useNavigate();
-
   return (
-    <div className="flex flex-col items-center justify-center pb-12 border-b px-4">
-      <p className="text-neutral-600 dark:text-neutral-200 text-base mb-10 font-bold">
+    (<div
+      className="w-[calc(100%-4rem)] mx-auto rounded-md  h-[30rem] overflow-hidden">
+      <Vortex
+        backgroundColor="black"
+        className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full">
+        <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
         The road to safety starts from here
-      </p>
-      <TypewriterEffect words={words} />
-      <div className="flex  flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4 mt-10">
-        <button onClick={ () => {navigate("/login")}} className="w-40 h-10 rounded-xl hover:bg-slate-300 dark:border-white dark:bg-black dark:text-white dark:hover:bg-slate-900 border border-black text-sm">
-          Join now
-        </button>
-        <button onClick={() => {navigate("/login")}} className="w-40 h-10 rounded-xl hover:bg-slate-300 dark:border-white dark:bg-black dark:text-white dark:hover:bg-slate-900 border border-black text-sm">
-          SignIn
-        </button>
-      </div>
-    </div>
+        </h2>
+        <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center">
+        Explore our services and discover how we can help you stay safe.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-10 mt-6">
+          <button onClick={() => {navigate("/login") }}
+            className="px-4 py-2 w-32 bg-cyan-500 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
+            Join now
+          </button>
+          <button onClick={() => {navigate("/login") }}
+            className="px-4 py-2 w-32 bg-cyan-500 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
+            Login
+          </button>
+        </div>
+      </Vortex>
+    </div>)
   );
-};
-
-export default HomeComp1;
+}
